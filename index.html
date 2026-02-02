@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo do Impostor</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>🎭 Jogo do Impostor</h1>
+    <section class="steps" aria-label="Instruções">
+      <p>1️⃣ Cada jogador vê sua frase em segredo</p>
+      <p>2️⃣ Um deles é o impostor</p>
+      <p>3️⃣ Conversem e descubram quem é</p>
+    </section>
+  </header>
+
+  <main>
+    <section id="setup">
+      <div class="input-group">
+        <input type="text" id="playerName" placeholder="Nome do jogador" autocomplete="off">
+        <button id="addPlayerBtn" type="button">Entrar</button>
+      </div>
+      
+      <div id="playerList" class="player-list"></div>
+      
+      <button id="startGameBtn" class="btn-primary full-width" disabled>🎮 Começar</button>
+    </section>
+
+    <section id="game" class="hidden">
+      <h3>👥 Ordem de fala</h3>
+      <div id="orderBox" class="box text-center"></div>
+
+      <div id="buttonsArea" class="player-grid"></div>
+
+      <div id="phraseBox" class="box hidden overlay-box">
+        <div id="phraseContent">
+          <p class="phrase-label">TEMA</p>
+          <p id="phraseTheme" class="highlight-text"></p>
+          <hr>
+          <p id="phraseText" class="phrase-main"></p>
+        </div>
+        <button id="hidePhraseBtn">🙈 Ocultar</button>
+      </div>
+
+      <div id="roundStatus" class="box hidden status-box"></div>
+
+      <div class="actions">
+        <button id="revealOfficialBtn" disabled>✅ Revelar Frase Oficial</button>
+        <button id="revealAllBtn">🎉 Revelar Tudo</button>
+        <button id="newRoundBtn">🔁 Nova Rodada</button>
+      </div>
+
+      <div id="result" class="box hidden result-box"></div>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
