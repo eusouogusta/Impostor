@@ -8,49 +8,48 @@ const PHRASES_DB = [
     impostor: "Qual a maior porcentagem que você já deu de gorjeta pra um garçom?"},
 
   { tema: "Apocalipse",
-    oficial: "Se você pudesse ter apenas um tipo de comida durante um apocalipse, qual seria?", 
+    oficial: "Se você pudesse ter apenas um tipo de comida durante um apocalipse, qual seria?",
     impostor: "Uma comida gordurosa que te dá aquele arrependimento depois de comer?"},
 
   { tema: "Crianças",
-    oficial: "De quantas crianças você acha que consegue ganhar no cabo de guerra?", 
+    oficial: "De quantas crianças você acha que consegue ganhar no cabo de guerra?",
     impostor: "Quantos amigos você teve durante a infância?"},
 
   { tema: "Férias",
-    oficial: "Qual o lugar mais legal que você foi para passar férias?", 
+    oficial: "Qual o lugar mais legal que você foi para passar férias?",
     impostor: "Qual o destino mais barato que você já foi?"},
 
   {tema: "Dinheiro",
-  oficial: "Se você tivesse dinheiro sobrando, com o que gastaria primeiro?",
-  impostor: "Qual foi a compra mais inútil que você já fez?"},
+   oficial: "Se você tivesse dinheiro sobrando, com o que gastaria primeiro?",
+   impostor: "Qual foi a compra mais inútil que você já fez?"},
 
   {tema: "Fama",
-  oficial: "Qual artista você queria ter o mesmo nível de fama?",
-  impostor: "Qual pessoa famosa você já encontrou pessoalmente?"},
+   oficial: "Qual artista você queria ter o mesmo nível de fama?",
+   impostor: "Qual pessoa famosa você já encontrou pessoalmente?"},
 
   {tema: "Sono",
-  oficial: "Quantas horas de sono seriam perfeitas pra você?",
-  impostor: "Qual foi a noite que você menos dormiu?"},
+   oficial: "Quantas horas de sono seriam perfeitas pra você?",
+   impostor: "Qual foi a noite que você menos dormiu?"},
 
   {tema: "Música",
-  oficial: "Qual música você colocaria pra tocar agora?",
-  impostor: "Qual música você já ouviu tanto que enjoou?"},
+   oficial: "Qual música você colocaria pra tocar agora?",
+   impostor: "Qual música você já ouviu tanto que enjoou?"},
 
   {tema: "Internet",
-  oficial: "Qual tipo de conteúdo você perde tempo vendo?",
-  impostor: "Qual tipo de conteúdo você já se arrependeu de ver?"},
+   oficial: "Qual tipo de conteúdo você perde tempo vendo?",
+   impostor: "Qual tipo de conteúdo você já se arrependeu de ver?"},
 
   {tema: "Festas",
-  oficial: "O que não pode faltar numa festa boa?",
-  impostor: "Qual foi a coisa mais estranha que você já viu numa festa?"},
+   oficial: "O que não pode faltar numa festa boa?",
+   impostor: "Qual foi a coisa mais estranha que você já viu numa festa?"},
 
   {tema: "Situações Improváveis",
-  oficial: "Qual situação você acha que nunca vai viver?",
-  impostor: "Qual situação estranha você já viveu?"},
+   oficial: "Qual situação você acha que nunca vai viver?",
+   impostor: "Qual situação estranha você já viveu?"},
 
   {tema: "Caos Social",
-  oficial: "O que você faria se ninguém fosse te julgar?",
-  impostor: "O que você já fez achando que ninguém estava vendo?"},
-
+   oficial: "O que você faria se ninguém fosse te julgar?",
+   impostor: "O que você já fez achando que ninguém estava vendo?"},
 ];
 
 /**
@@ -63,7 +62,8 @@ class ImpostorGame {
       players: [],
       viewed: [],
       currentSet: null,
-      impostorIndex: null
+      impostorIndex: null,
+      availableIndices: [] // [NOVO] Array para controlar temas disponíveis
     };
 
     // Cache de Elementos do DOM
@@ -92,7 +92,14 @@ class ImpostorGame {
   }
 
   init() {
+    this.resetAvailableThemes(); // [NOVO] Inicializa o "baralho" de temas
     this.bindEvents();
+  }
+
+  // [NOVO] Enche o array com índices [0, 1, 2, ... total]
+  resetAvailableThemes() {
+    this.state.availableIndices = PHRASES_DB.map((_, index) => index);
+    console.log("Temas resetados/embaralhados!"); 
   }
 
   bindEvents() {
@@ -128,7 +135,6 @@ class ImpostorGame {
   }
 
   updatePlayerListUI() {
-    // Uso de map para gerar HTML de forma mais limpa
     const listHtml = this.state.players
       .map(p => `<div class="player-tag">👤 ${p}</div>`)
       .join("");
@@ -144,9 +150,27 @@ class ImpostorGame {
   }
 
   setupRound() {
-    // Reset de estado
+    // [ALTERADO] Lógica de seleção única de tema
+    
+    // 1. Se acabaram os temas, reseta a lista para começar de novo
+    if (this.state.availableIndices.length === 0) {
+        this.resetAvailableThemes();
+    }
+
+    // 2. Sorteia um índice DENTRO do array de disponíveis
+    const randomIndexPosition = Math.floor(Math.random() * this.state.availableIndices.length);
+    
+    // 3. Pega o ID real do banco de dados
+    const dbIndex = this.state.availableIndices[randomIndexPosition];
+    
+    // 4. Remove esse índice da lista de disponíveis (para não repetir)
+    this.state.availableIndices.splice(randomIndexPosition, 1);
+
+    // 5. Define a frase atual
+    this.state.currentSet = PHRASES_DB[dbIndex];
+    
+    // Reset de estado da rodada
     this.state.viewed = new Array(this.state.players.length).fill(false);
-    this.state.currentSet = PHRASES_DB[Math.floor(Math.random() * PHRASES_DB.length)];
     this.state.impostorIndex = Math.floor(Math.random() * this.state.players.length);
 
     // Reset UI
@@ -162,13 +186,13 @@ class ImpostorGame {
 
   renderGameButtons() {
     this.ui.buttonsArea.innerHTML = "";
-    const fragment = document.createDocumentFragment(); // Performance: Reflow único
+    const fragment = document.createDocumentFragment();
 
     this.state.players.forEach((player, i) => {
       const btn = document.createElement("button");
       btn.textContent = player;
       btn.className = "player-btn";
-      btn.dataset.index = i; // Usado no Event Delegation
+      btn.dataset.index = i;
       fragment.appendChild(btn);
     });
 
@@ -195,7 +219,6 @@ class ImpostorGame {
     this.ui.phraseText.textContent = "📱 Passe o celular";
     this.ui.phraseTheme.textContent = "...";
     
-    // Pequeno delay para UX
     setTimeout(() => {
         if(!this.ui.phraseBox.classList.contains('hidden')) {
             this.ui.phraseBox.classList.add("hidden");
@@ -213,7 +236,6 @@ class ImpostorGame {
   }
 
   generateOrder() {
-    // Algoritmo Fisher-Yates Shuffle para aleatoriedade real (Performance/Correção)
     const shuffled = [...this.state.players];
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
