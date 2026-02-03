@@ -7,6 +7,3 @@ Um jogador recebe uma frase diferente e precisa se passar por inocente.
 1. Adicione pelo menos 3 jogadores
 2. Cada um vê sua frase em segredo
 3. Conversem e descubram o impostor
-
-
-Teste commit
