@@ -3,18 +3,54 @@
  * Separado em constante para facilitar manutenção futura.
  */
 const PHRASES_DB = [
-  { tema: "Objetos", oficial: "Algo que você usaria todos os dias", impostor: "Algo que você evitaria sempre" },
-  { tema: "Superpoderes", oficial: "Um poder que facilitaria sua vida", impostor: "Um poder que complicaria sua vida" },
-  { tema: "Lugares", oficial: "Um lugar onde você se sentiria em casa", impostor: "Um lugar onde você se sentiria desconfortável" },
-  { tema: "Comida", oficial: "Algo que você comeria sem enjoar", impostor: "Algo que você evitaria comer" },
-  { tema: "Animais", oficial: "Um animal que você gostaria de ter", impostor: "Um animal que te daria medo" },
-  { tema: "Clima", oficial: "Um tipo de clima agradável", impostor: "Um tipo de clima insuportável" },
-  { tema: "Rotina", oficial: "Algo que faz parte do seu dia", impostor: "Algo que você nunca faria no dia a dia" },
-  { tema: "Objetos pessoais", oficial: "Algo que você sempre leva com você", impostor: "Algo que você nunca levaria" },
-  { tema: "Situações", oficial: "Algo que daria uma vergonha leve", impostor: "Algo que seria extremamente vergonhoso" },
-  { tema: "Coisas irritantes", oficial: "Algo que te incomoda um pouco", impostor: "Algo que te deixa muito irritado" },
-  { tema: "Hábitos", oficial: "Um hábito estranho mas aceitável", impostor: "Um hábito completamente bizarro" },
-  { tema: "Mentiras", oficial: "Uma mentira social aceitável", impostor: "Uma mentira absurda" },
+  { tema: "Loteria",
+    oficial: "Se você ganhasse na loteria, quantos % você daria aos seus pais?",
+    impostor: "Qual a maior porcentagem que você já deu de gorjeta pra um garçom?"},
+
+  { tema: "Apocalipse",
+    oficial: "Se você pudesse ter apenas um tipo de comida durante um apocalipse, qual seria?", 
+    impostor: "Uma comida gordurosa que te dá aquele arrependimento depois de comer?"},
+
+  { tema: "Crianças",
+    oficial: "De quantas crianças você acha que consegue ganhar no cabo de guerra?", 
+    impostor: "Quantos amigos você teve durante a infância?"},
+
+  { tema: "Férias",
+    oficial: "Qual o lugar mais legal que você foi para passar férias?", 
+    impostor: "Qual o destino mais barato que você já foi?"},
+
+  {tema: "Dinheiro",
+  oficial: "Se você tivesse dinheiro sobrando, com o que gastaria primeiro?",
+  impostor: "Qual foi a compra mais inútil que você já fez?"},
+
+  {tema: "Fama",
+  oficial: "Qual artista você queria ter o mesmo nível de fama?",
+  impostor: "Qual pessoa famosa você já encontrou pessoalmente?"},
+
+  {tema: "Sono",
+  oficial: "Quantas horas de sono seriam perfeitas pra você?",
+  impostor: "Qual foi a noite que você menos dormiu?"},
+
+  {tema: "Música",
+  oficial: "Qual música você colocaria pra tocar agora?",
+  impostor: "Qual música você já ouviu tanto que enjoou?"},
+
+  {tema: "Internet",
+  oficial: "Qual tipo de conteúdo você perde tempo vendo?",
+  impostor: "Qual tipo de conteúdo você já se arrependeu de ver?"},
+
+  {tema: "Festas",
+  oficial: "O que não pode faltar numa festa boa?",
+  impostor: "Qual foi a coisa mais estranha que você já viu numa festa?"},
+
+  {tema: "Situações Improváveis",
+  oficial: "Qual situação você acha que nunca vai viver?",
+  impostor: "Qual situação estranha você já viveu?"},
+
+  {tema: "Caos Social",
+  oficial: "O que você faria se ninguém fosse te julgar?",
+  impostor: "O que você já fez achando que ninguém estava vendo?"},
+
 ];
 
 /**

@@ -164,3 +164,11 @@ button:disabled {
   .actions { flex-direction: column; }
   .actions button { width: 100%; }
 }
+.luckyText {
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  color:var(--primary-color);
+  font-size: 20px;
+  font-style: italic;
+}
