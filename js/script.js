@@ -132,6 +132,13 @@ class ImpostorGame {
     this.ui.playerName.value = "";
     this.ui.playerName.focus();
     this.updatePlayerListUI();
+
+    // Feedback visual de adição
+    this.ui.addPlayerBtn.textContent = "Adicionado!";
+
+    // 2. Criamos um "timer" para o texto voltar ao normal após 2 segundos (2000 milissegundos)
+    setTimeout(() => {
+        this.ui.addPlayerBtn.textContent = "Entrar";}, 1000);
   }
 
   updatePlayerListUI() {
