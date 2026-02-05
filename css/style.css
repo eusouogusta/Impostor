@@ -50,6 +50,13 @@ h1 {
   letter-spacing: -1px;
 }
 
+h3 {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
 .steps {
   background: rgba(255, 255, 255, 0.03);
   border: var(--surface-border);
@@ -195,14 +202,6 @@ button:disabled {
 }
 
 /* --- Área do Jogo --- */
-.luckyText {
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
-}
-
 #orderBox {
   background: rgba(0, 0, 0, 0.4);
   padding: 15px;
